@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 //@ComponentScan("ru.itis.javalab.trello.impl.repository")
 @ComponentScan("ru.itis.javalab.trello.impl.service")
-@EnableJpaRepositories(basePackages = "ru.itis.javalab.trello.impl.jpa.repository")
+@EnableJpaRepositories(basePackages = "ru.itis.javalab.trello.impl.repository")
 @EntityScan(basePackages = "ru.itis.javalab.trello.impl.entity")
 public class TrelloImplConfiguration {
     @Bean

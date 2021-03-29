@@ -6,13 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="trello-impl" />
-        <module name="trello-client" />
         <module name="trello" />
         <module name="trello-api" />
+        <module name="trello-impl" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="trello-client" target="1.8" />
       <module name="trello-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
