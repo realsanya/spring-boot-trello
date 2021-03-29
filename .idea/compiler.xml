@@ -13,7 +13,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="trello-client" target="1.8" />
-      <module name="trello-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -21,7 +20,6 @@
       <module name="trello-api" options="-parameters" />
       <module name="trello-client" options="-parameters" />
       <module name="trello-impl" options="-parameters" />
-      <module name="trello-web" options="-parameters" />
     </option>
   </component>
 </project>
