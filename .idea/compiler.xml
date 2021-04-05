@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="trello" />
         <module name="trello-api" />
+        <module name="trello-web" />
         <module name="trello-impl" />
       </profile>
     </annotationProcessing>
@@ -20,6 +20,7 @@
       <module name="trello-api" options="-parameters" />
       <module name="trello-client" options="-parameters" />
       <module name="trello-impl" options="-parameters" />
+      <module name="trello-web" options="-parameters" />
     </option>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package ru.itis.javalab.trello.impl.entity;
+package ru.itis.javalab.trello.impl.models;
 
 
 import lombok.Data;

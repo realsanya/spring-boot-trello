@@ -1,12 +1,12 @@
-package ru.itis.javalab.trello.impl.service;
+package ru.itis.javalab.trello.impl.services;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itis.javalab.trello.api.dto.UserDto;
-import ru.itis.javalab.trello.api.service.UserService;
-import ru.itis.javalab.trello.impl.repository.UserRepository;
+import ru.itis.javalab.trello.api.services.UserService;
+import ru.itis.javalab.trello.impl.repositories.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService<UserDto, Long> {
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService<UserDto, Long> {
     }
 
     @Override
-    public void signUp(UserDto user) {
+    public void signUp(UserDto userDto) {
 
     }
 }
