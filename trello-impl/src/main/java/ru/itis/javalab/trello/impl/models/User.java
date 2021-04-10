@@ -25,8 +25,8 @@ public class User extends AutoincrementEntity{
     @Enumerated(value = EnumType.STRING)
     private Role role;
     private Date dateOfBirth;
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Project> projectList;
+    @OneToMany
+    private List<Project> projects;
     @OneToMany
     private List<Comment> comments;
 

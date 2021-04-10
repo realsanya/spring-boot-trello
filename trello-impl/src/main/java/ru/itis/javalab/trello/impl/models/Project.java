@@ -21,8 +21,7 @@ public class Project extends AutoincrementEntity {
     private Date dateOfStart;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User owner;
-    // add dashbords
+    private User user;
     @OneToMany
     private List<Dashboard> dashboards;
 }

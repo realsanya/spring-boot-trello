@@ -6,10 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -18,14 +16,19 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "task")
-public class Task extends AutoincrementEntity {
+public class Task extends AutoincrementEntity{
     private String name;
     private String description;
     @ManyToOne
+    @JoinColumn(name = "dashboard_id")
     private Dashboard dashboard;
-
     @OneToMany
     private List<Comment> comments;
     @OneToMany
-    private List<File> files;
+    private List<Attachment> attachments;
+    @OneToMany
+    private List<CheckItem> checkItems;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateOfStart;
+    private Date dateOfEnd;
 }

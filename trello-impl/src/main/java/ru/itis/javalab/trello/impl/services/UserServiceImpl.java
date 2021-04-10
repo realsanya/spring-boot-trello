@@ -6,7 +6,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itis.javalab.trello.api.dto.UserDto;
 import ru.itis.javalab.trello.api.services.UserService;
+import ru.itis.javalab.trello.impl.models.User;
 import ru.itis.javalab.trello.impl.repositories.UserRepository;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService<UserDto, Long> {
@@ -23,7 +26,24 @@ public class UserServiceImpl implements UserService<UserDto, Long> {
     }
 
     @Override
-    public void signUp(UserDto userDto) {
+    public UserDto getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email)
+                .map(userEntity -> modelMapper.map(userEntity, UserDto.class)).orElse(null);
+    }
 
+    @Override
+    public UserDto getUserById(Long userId) {
+        return userRepository.findById(userId)
+                .map(userEntity -> modelMapper.map(userEntity, UserDto.class)).orElse(null);
+    }
+
+    @Override
+    public List<UserDto> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public void save(UserDto userDto) {
+        userRepository.save(modelMapper.map(userDto, User.class));
     }
 }
