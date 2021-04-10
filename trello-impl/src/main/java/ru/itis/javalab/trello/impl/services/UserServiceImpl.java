@@ -10,6 +10,7 @@ import ru.itis.javalab.trello.impl.models.User;
 import ru.itis.javalab.trello.impl.repositories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService<UserDto, Long> {
@@ -32,9 +33,9 @@ public class UserServiceImpl implements UserService<UserDto, Long> {
     }
 
     @Override
-    public UserDto getUserById(Long userId) {
-        return userRepository.findById(userId)
-                .map(userEntity -> modelMapper.map(userEntity, UserDto.class)).orElse(null);
+    public Optional<UserDto> getUserById(Long userId) {
+        return userRepository.findById(userId).map(user ->
+                modelMapper.map(user, UserDto.class));
     }
 
     @Override
