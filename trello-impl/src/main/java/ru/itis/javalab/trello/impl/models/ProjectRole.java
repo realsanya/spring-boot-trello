@@ -1,6 +1,6 @@
 package ru.itis.javalab.trello.impl.models;
 
-public enum Role {
+public enum ProjectRole {
     OWNER("OWNER"),
     DEVELOPER("DEVELOPER"),
     DESIGNER("DESIGNER"),
@@ -8,7 +8,7 @@ public enum Role {
 
     private final String role;
 
-    Role(String role) {
+    ProjectRole(String role) {
         this.role = role;
     }
 

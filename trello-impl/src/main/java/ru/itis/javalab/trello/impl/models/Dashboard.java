@@ -25,7 +25,7 @@ public class Dashboard extends AutoincrementEntity {
     private Project project;
 
     @Enumerated(value = EnumType.STRING)
-    private Role role;
+    private ProjectRole projectRole;
 
     @OneToMany
     private List<Task> tasks;

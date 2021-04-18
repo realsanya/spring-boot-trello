@@ -8,9 +8,7 @@ import org.springframework.stereotype.Component;
 import ru.itis.javalab.trello.impl.models.User;
 import ru.itis.javalab.trello.impl.repositories.UserRepository;
 
-import java.util.Optional;
-
-//@Component("customUserDetailService")
+@Component("customUserDetailService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;

@@ -7,7 +7,7 @@ import ru.itis.javalab.trello.api.services.UserService;
 import ru.itis.javalab.trello.web.exception.PageNotFoundException;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -27,4 +27,6 @@ public class UserController {
         return (UserDto) userService.getUserById(id)
                 .orElseThrow(() -> new PageNotFoundException("Page not found"));
     }
+
+
 }
