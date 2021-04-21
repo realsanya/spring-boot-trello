@@ -18,9 +18,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import ru.itis.javalab.trello.web.security.filter.JwtFilter;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -76,6 +82,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        }
+
+        @Bean
+        public CorsConfigurationSource corsConfigurationSource() {
+            final CorsConfiguration configuration = new CorsConfiguration();
+            configuration.setAllowedOrigins(Arrays.asList("*"));
+
+            List<String> methodsAllowed = new ArrayList<>();
+            methodsAllowed.add("HEAD");
+            methodsAllowed.add("GET");
+            methodsAllowed.add("POST");
+            methodsAllowed.add("PUT");
+            methodsAllowed.add("DELETE");
+            methodsAllowed.add("PATCH");
+            configuration.setAllowedMethods(methodsAllowed);
+
+            List<String> headersAllowed = new ArrayList<>();
+            headersAllowed.add("*");
+            configuration.setAllowedHeaders(headersAllowed);
+
+            final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+            source.registerCorsConfiguration("/**", configuration);
+            return source;
         }
 
         @Bean

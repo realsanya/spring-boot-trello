@@ -6,6 +6,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Data
 public class SignUpForm {
@@ -16,6 +17,7 @@ public class SignUpForm {
     @Email
     @Size(min = 8)
     private String email;
+    private Date dateOfBirth;
     @NotBlank
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")
     private String password;

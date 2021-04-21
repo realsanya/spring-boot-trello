@@ -33,6 +33,7 @@ public class SignUpServiceImpl implements SignUpService<SignUpForm, Long> {
                         .name(form.getName())
                         .surname(form.getSurname())
                         .email(form.getEmail())
+                        .dateOfBirth(form.getDateOfBirth())
                         .password(passwordEncoder.encode(form.getPassword()))
                         .role(User.Role.USER)
                         .state(User.State.NOT_CONFIRMED)
