@@ -28,7 +28,16 @@ public class Task extends AutoincrementEntity{
     private List<Attachment> attachments;
     @OneToMany
     private List<CheckItem> checkItems;
+    private TaskStatus status;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfStart;
     private Date dateOfEnd;
+
+    public enum TaskStatus {
+        TODO,
+        PAUSE,
+        ACTIVE,
+        COMPLETED,
+        ARCHIVED,
+    }
 }

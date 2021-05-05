@@ -24,32 +24,27 @@ public class User extends AutoincrementEntity{
     private State state;
     @Enumerated(value = EnumType.STRING)
     private Role role;
+    @Enumerated(value = EnumType.STRING)
+    private AuthProvider auth_provider;
     private Date dateOfBirth;
     @OneToMany
     private List<Project> projects;
     @OneToMany
     private List<Comment> comments;
 
+
     public enum State {
-        CONFIRMED("CONFIRMED"),
-        NOT_CONFIRMED("NOT_CONFIRMED"),
-        ACTIVE("ACTIVE"),
-        BANNED("BANNED");
-
-        private final String state;
-
-        State(String state) {
-            this.state = state;
-        }
-
-        public String getState() {
-            return state;
-        }
+        ACTIVE,
+        BANNED,
     }
 
     public enum Role {
         ADMIN,
         USER,
+    }
+
+    public enum AuthProvider {
+        LOCAL, GOOGLE
     }
 
     public boolean isActive(){

@@ -9,4 +9,5 @@ public interface ProjectService <ProjectDto, Long> {
     Page<ProjectDto> getAllProjectsByUserId(Long userId, Pageable pageable);
     Page<ProjectDto> getAll(Pageable pageable);
     Optional<ProjectDto> getById(Long id);
+    void createProject(ProjectDto projectDto);
 }

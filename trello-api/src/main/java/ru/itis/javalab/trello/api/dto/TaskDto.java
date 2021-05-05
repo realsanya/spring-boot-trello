@@ -1,7 +1,9 @@
 package ru.itis.javalab.trello.api.dto;
 
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -9,10 +11,12 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectDto {
+public class TaskDto {
     private Long id;
     private String name;
     private String description;
+    private Long dashboardId;
+    private String status;
     private Date dateOfStart;
-    private Long userId;
+    private Date dateOfEnd;
 }

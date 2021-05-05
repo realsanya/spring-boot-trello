@@ -9,6 +9,8 @@ import ru.itis.javalab.trello.api.services.ProjectService;
 import ru.itis.javalab.trello.impl.models.Project;
 import ru.itis.javalab.trello.impl.repositories.ProjectRepository;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 
 
@@ -39,5 +41,13 @@ public class ProjectServiceImpl implements ProjectService<ProjectDto, Long> {
     public Optional<ProjectDto> getById(Long id) {
         return projectRepository.findById(id)
                 .map(project -> modelMapper.map(project, ProjectDto.class));
+    }
+
+    @Override
+    public void createProject(ProjectDto projectDto) {
+        System.out.println(projectDto);
+        projectDto.setId(null);
+        projectDto.setDateOfStart(new Date());
+        projectRepository.save(modelMapper.map(projectDto, Project.class));
     }
 }

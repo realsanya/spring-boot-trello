@@ -1,11 +1,15 @@
 package ru.itis.javalab.trello.web.controllers.rest;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.itis.javalab.trello.api.dto.DashboardDto;
 import ru.itis.javalab.trello.api.dto.ProjectDto;
 import ru.itis.javalab.trello.api.exception.NotFoundException;
 import ru.itis.javalab.trello.api.services.ProjectService;
@@ -19,20 +23,35 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
+    @ApiOperation(value = "Получение всех проектов")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно найдены", response = ProjectDto.class)})
     @GetMapping("/proj")
     public Page<ProjectDto> findAll(Pageable pageable){
         return projectService.getAll(pageable);
     }
 
+    @ApiOperation(value = "Получение проектов по id пользователя")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно найдены", response = ProjectDto.class)})
     @GetMapping("/projects")
-    public Page<ProjectDto> findAllByUserID(@RequestParam(required = false) Long userId, Pageable pageable){
+    public Page<ProjectDto> findAllByUserID(@RequestParam Long userId, Pageable pageable){
         return projectService.getAllProjectsByUserId(userId, pageable);
     }
 
+    @ApiOperation(value = "Получение проекта по id")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно найдены", response = ProjectDto.class)})
     @GetMapping("/project/{id}")
-    public ProjectDto project(@PathVariable Long id) throws Throwable {
+    public ProjectDto findProjectById(@PathVariable Long id) throws Throwable {
         System.out.println(id);
         return (ProjectDto) projectService.getById(id)
                 .orElseThrow(() -> new NotFoundException("Project by id not found"));
+    }
+
+    @ApiOperation(value = "Создание нового проекта")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно сохранен", response = ProjectDto.class)})
+    @PostMapping("/add")
+    public ResponseEntity<?> addProject(@RequestBody ProjectDto projectDto){
+        System.out.println(projectDto);
+        projectService.createProject(projectDto);
+        return ResponseEntity.ok("Success");
     }
 }
