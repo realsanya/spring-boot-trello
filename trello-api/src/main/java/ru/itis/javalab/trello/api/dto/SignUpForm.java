@@ -1,14 +1,12 @@
 package ru.itis.javalab.trello.api.dto;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 import ru.itis.javalab.trello.api.validation.ValidNames;
 import ru.itis.javalab.trello.api.validation.ValidPassword;
 import ru.itis.javalab.trello.api.validation.ValidPasswords;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Date;
 

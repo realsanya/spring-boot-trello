@@ -9,6 +9,7 @@ import ru.itis.javalab.trello.api.services.SignUpService;
 import ru.itis.javalab.trello.impl.models.User;
 import ru.itis.javalab.trello.impl.repositories.UserRepository;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
