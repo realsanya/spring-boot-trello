@@ -5,13 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DashboardDto {
-    private Long id;
-    private UserDto user;
-    private Long projectId;
-    private String projectRole;
+public class CommentDto {
+    private Long userId;
+    private Long taskId;
+    public String text;
+    public Date createdDate;
 }

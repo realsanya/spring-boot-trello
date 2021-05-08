@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DashboardDto {
+public class AttachmentDto {
     private Long id;
-    private UserDto user;
-    private Long projectId;
-    private String projectRole;
+    private Long taskId;
+    private String type;
+    private String path;
 }

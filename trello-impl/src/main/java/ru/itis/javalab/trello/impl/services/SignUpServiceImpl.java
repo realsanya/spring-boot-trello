@@ -1,6 +1,7 @@
 package ru.itis.javalab.trello.impl.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.itis.javalab.trello.api.dto.SignUpForm;
@@ -25,6 +26,11 @@ public class SignUpServiceImpl implements SignUpService<SignUpForm, Long> {
     //TODO прикрутить отправку email
 
     @Override
+    public boolean userIsExist(String email) {
+        return userRepository.findUserByEmail(email).isPresent();
+    }
+
+    @Override
     public void signUp(SignUpForm form) {
         if(form.getPassword().equals(form.getConfirmPassword())) {
             Optional<User> userIsExist = userRepository.findUserByEmail(form.getEmail());
@@ -36,7 +42,7 @@ public class SignUpServiceImpl implements SignUpService<SignUpForm, Long> {
                         .dateOfBirth(form.getDateOfBirth())
                         .password(passwordEncoder.encode(form.getPassword()))
                         .role(User.Role.USER)
-                        .state(User.State.NOT_CONFIRMED)
+                        .state(User.State.ACTIVE)
                         .build();
                 userRepository.save(user);
             } else throw new IllegalArgumentException("Пользователь с таким email уже существует!");

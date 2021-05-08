@@ -12,9 +12,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
+    private Long id;
     private String name;
     private String surname;
     private String email;
-    private String password;
     private Date dateOfBirth;
+    private String role;
 }

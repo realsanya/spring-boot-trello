@@ -14,6 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "comment")
 public class Comment extends AutoincrementEntity {
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

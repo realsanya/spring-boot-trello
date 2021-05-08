@@ -48,8 +48,19 @@ public class ProjectController {
 
     @ApiOperation(value = "Создание нового проекта")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно сохранен", response = ProjectDto.class)})
-    @PostMapping("/add")
+    @PostMapping("/project/add")
     public ResponseEntity<?> addProject(@RequestBody ProjectDto projectDto){
+        System.out.println(projectDto);
+        projectService.createProject(projectDto);
+        return ResponseEntity.ok("Success");
+    }
+
+    // TODO
+    @ApiOperation(value = "Добавление нового пользователя в проект " +
+            "(происходит создание доски пользователя, привязанной к этому проекту) ")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно сохранен", response = ProjectDto.class)})
+    @PostMapping("/project/member/add")
+    public ResponseEntity<?> addMemberToProject(@RequestBody ProjectDto projectDto){
         System.out.println(projectDto);
         projectService.createProject(projectDto);
         return ResponseEntity.ok("Success");

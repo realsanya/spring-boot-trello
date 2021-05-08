@@ -4,11 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ru.itis.javalab.trello.api.dto.ProjectDto;
+import ru.itis.javalab.trello.api.dto.CommentDto;
+import ru.itis.javalab.trello.api.dto.TaskData;
 import ru.itis.javalab.trello.api.dto.TaskDto;
+import ru.itis.javalab.trello.api.services.CommentService;
 import ru.itis.javalab.trello.api.services.TaskService;
-import ru.itis.javalab.trello.impl.models.Project;
 import ru.itis.javalab.trello.impl.models.Task;
+import ru.itis.javalab.trello.impl.repositories.CommentRepository;
 import ru.itis.javalab.trello.impl.repositories.TaskRepository;
 
 import java.util.Optional;
