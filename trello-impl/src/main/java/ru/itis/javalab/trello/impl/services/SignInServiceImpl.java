@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.itis.javalab.trello.api.dto.SignInDto;
-import ru.itis.javalab.trello.api.dto.SignInForm;
-import ru.itis.javalab.trello.api.dto.TokenDto;
-import ru.itis.javalab.trello.api.dto.UserDto;
+import ru.itis.javalab.trello.api.dto.*;
 import ru.itis.javalab.trello.api.services.SignInService;
 import ru.itis.javalab.trello.api.services.UserService;
 import ru.itis.javalab.trello.impl.models.Token;
@@ -69,5 +66,20 @@ public class SignInServiceImpl implements SignInService<SignInDto, Long> {
         } else {
             throw new UsernameNotFoundException("Invalid email or password");
         }
+    }
+
+    @Override
+    public TokenDto googleSignIn(GoogleForm googleForm) {
+        Optional<User> foundUser = userRepository.findUserByEmail(googleForm.getEmail());
+        if(!foundUser.isPresent()) {
+            User user = User.builder()
+                    .email(googleForm.getEmail())
+                    .auth_provider(User.AuthProvider.GOOGLE)
+                    .name(googleForm.getName())
+                    .surname(googleForm.getSurname())
+                    .build();
+            userRepository.save(user);
+        }
+        return null;
     }
 }

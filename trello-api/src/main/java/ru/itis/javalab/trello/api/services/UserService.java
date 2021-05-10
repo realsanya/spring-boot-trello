@@ -16,7 +16,7 @@ public interface UserService <UserDto, Long> {
 
     public void save(UserDto userDto);
 
-    void signUpAfterOAuth(String email, String name, String surname, String provider);
+    void signUpAfterOAuth(String email, String name,String provider);
 
     void updateUserAfterOAuth(UserDto userDto, String name, String toString);
 }

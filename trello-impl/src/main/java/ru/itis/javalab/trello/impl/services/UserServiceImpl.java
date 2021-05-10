@@ -53,11 +53,10 @@ public class UserServiceImpl implements UserService<UserDto, Long> {
     }
 
     @Override
-    public void signUpAfterOAuth(String email, String name, String surname, String provider) {
+    public void signUpAfterOAuth(String email, String name,  String provider) {
         User user = User.builder()
                 .email(email)
                 .name(name)
-                .surname(surname)
                 .auth_provider(User.AuthProvider.GOOGLE)
                 .role(User.Role.USER)
                 .build();
