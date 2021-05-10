@@ -15,6 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "dashboard")
+@NamedEntityGraph(
+        name="Dashboard.Tasks",
+        attributeNodes = @NamedAttributeNode(
+                value = "tasks"
+        )
+)
 public class Dashboard extends AutoincrementEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -27,7 +33,7 @@ public class Dashboard extends AutoincrementEntity {
     @Enumerated(value = EnumType.STRING)
     private ProjectRole projectRole;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Task> tasks;
 
 }

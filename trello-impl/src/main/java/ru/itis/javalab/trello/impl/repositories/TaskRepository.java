@@ -7,5 +7,5 @@ import ru.itis.javalab.trello.impl.models.Dashboard;
 import ru.itis.javalab.trello.impl.models.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    Page<Dashboard> findByDashboardId(Long dashboardId, Pageable pageable);
+    Page<Task> findByDashboardId(Long dashboardId, Pageable pageable);
 }

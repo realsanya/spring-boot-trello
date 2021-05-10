@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itis.javalab.trello.api.dto.DashboardDto;
-import ru.itis.javalab.trello.api.dto.ProjectDto;
 import ru.itis.javalab.trello.api.exception.NotFoundException;
 import ru.itis.javalab.trello.api.services.DashboardService;
 
@@ -34,8 +33,9 @@ public class DashboardController {
     @ApiOperation(value = "Получение dasboard по id проекта и id юзера")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно найден", response = DashboardDto.class)})
     @GetMapping("/dashboard")
-    public DashboardDto dashboard(@RequestParam Long projectId, @RequestParam Long userId) throws Throwable {
-        return (DashboardDto) dashboardService.getByProjectIdAndUserId(projectId, userId)
+    public ResponseEntity<DashboardDto> dashboard(@RequestParam Long projectId, @RequestParam Long userId) throws Throwable {
+         DashboardDto dashboardDto = (DashboardDto) dashboardService.getByProjectIdAndUserId(projectId, userId)
                 .orElseThrow(() -> new NotFoundException("Dashboard not found"));
+         return ResponseEntity.ok(dashboardDto);
     }
 }

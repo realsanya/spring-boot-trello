@@ -18,7 +18,7 @@ public class CheckItem extends AutoincrementEntity {
     @JoinColumn(name = "task_id")
     private Task task;
     private String text;
-    private String status;
+    private Boolean status;
 }
 
 

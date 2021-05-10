@@ -55,14 +55,22 @@ public class ProjectController {
         return ResponseEntity.ok("Success");
     }
 
+    @ApiOperation(value = "Удаление проекта")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно сохранен", response = ProjectDto.class)})
+    @PostMapping("/project/delete")
+    public ResponseEntity<?> deleteProject(@RequestBody ProjectDto projectDto){
+        projectService.deleteProject(projectDto);
+        return ResponseEntity.ok("Success");
+    }
+
     // TODO
-    @ApiOperation(value = "Добавление нового пользователя в проект " +
+    @ApiOperation(value = "Добавление нового пользователя в проект по email " +
             "(происходит создание доски пользователя, привязанной к этому проекту) ")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно сохранен", response = ProjectDto.class)})
     @PostMapping("/project/member/add")
-    public ResponseEntity<?> addMemberToProject(@RequestBody ProjectDto projectDto){
-        System.out.println(projectDto);
-        projectService.createProject(projectDto);
+    public ResponseEntity<String> addMemberToProject(@RequestParam Long projectId, @RequestParam String memberEmail){
+        System.out.println(projectId + " " + memberEmail);
+        projectService.addMember(projectId, memberEmail);
         return ResponseEntity.ok("Success");
     }
 }
