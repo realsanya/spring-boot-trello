@@ -43,6 +43,7 @@ public class SignUpServiceImpl implements SignUpService<SignUpForm, Long> {
                         .dateOfBirth(form.getDateOfBirth())
                         .password(passwordEncoder.encode(form.getPassword()))
                         .role(User.Role.USER)
+                        .auth_provider(User.AuthProvider.LOCAL)
                         .state(User.State.ACTIVE)
                         .build();
                 userRepository.save(user);

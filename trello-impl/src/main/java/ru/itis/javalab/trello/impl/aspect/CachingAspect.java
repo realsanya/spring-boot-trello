@@ -32,7 +32,7 @@ public class CachingAspect {
 
     @Before("cache()")
     public void cacheMethodBefore(JoinPoint joinPoint) {
-        log.info("HEEEEEY");
+        log.info("Cashing before");
     }
 
     @Around("@annotation(Caching)")

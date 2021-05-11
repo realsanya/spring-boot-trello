@@ -69,10 +69,9 @@ public class ProjectServiceImpl implements ProjectService<ProjectDto, Long> {
 
     @Override
     public void createProject(ProjectDto projectDto) {
-        projectDto.setId(null);
         projectDto.setDateOfStart(new Date());
         projectRepository.save(modelMapper.map(projectDto, Project.class));
-        dashboardService.createDashboard(projectDto.getUserId(), projectDto.getUserId());
+        dashboardService.createDashboard(projectDto.getId(), projectDto.getUserId());
     }
 
     @Override
