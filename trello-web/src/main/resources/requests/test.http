@@ -1,0 +1,19 @@
+###
+
+POST http://localhost:8080/signIn
+Content-Type: application/json
+REFRESH-TOKEN:
+
+{
+  "email": "sasha@mail.ru",
+  "password": "qwerty007"
+}
+
+###
+
+
+###
+
+GET http://localhost:8080/projects/1
+Content-Type: application/json
+###
