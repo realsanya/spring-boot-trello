@@ -13,7 +13,6 @@ import ru.itis.javalab.trello.api.dto.TaskDto;
 import ru.itis.javalab.trello.api.services.TaskService;
 
 @RestController
-@RequestMapping("/task")
 public class TaskController {
 
     private final TaskService taskService;
@@ -25,16 +24,24 @@ public class TaskController {
 
     @ApiOperation(value = "Получение проектов по id пользователя")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно найдена", response = TaskDto.class)})
-    @GetMapping("/all")
+    @RequestMapping("/task/all")
     public Page<TaskDto> findAllByDashboardID(@RequestParam Long dashboardId, Pageable pageable){
         return taskService.getByDashboardId(dashboardId, pageable);
     }
 
     @ApiOperation(value = "Добавление новой задачи")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно сохранен", response = TaskDto.class)})
-    @PostMapping("/add")
+    @RequestMapping("/task/add")
     public ResponseEntity<?> addTask(@RequestBody TaskDto taskDto){
         taskService.addTask(taskDto);
+        return ResponseEntity.ok("Success");
+    }
+
+    @ApiOperation(value = "Архивирование задачи")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно архивирована", response = TaskDto.class)})
+    @RequestMapping("/task/archive")
+    public ResponseEntity<?> archiveTask(@RequestParam Long taskId){
+        taskService.archiveTask(taskId);
         return ResponseEntity.ok("Success");
     }
 

@@ -9,4 +9,5 @@ public interface TaskService<TaskDto, Long> {
     Page<TaskDto> getByDashboardId(Long dashboardId, Pageable pageable);
     Optional<TaskDto> getById(Long id);
     void addTask(TaskDto taskDto);
+    void archiveTask(Long id);
 }

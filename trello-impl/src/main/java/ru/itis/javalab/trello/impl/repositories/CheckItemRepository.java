@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ru.itis.javalab.trello.impl.models.CheckItem;
 
 public interface CheckItemRepository extends JpaRepository<CheckItem, Long> {
-    @EntityGraph(value = "Task.CheckItems")
+//    @EntityGraph(value = "Task.CheckItems")
     Page<CheckItem> findByTaskId(Long taskId, Pageable pageable);
 }

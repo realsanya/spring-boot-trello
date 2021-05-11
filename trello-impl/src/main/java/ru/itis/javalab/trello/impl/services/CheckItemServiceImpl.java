@@ -22,7 +22,6 @@ public class CheckItemServiceImpl implements CheckItemService<CheckItemDto, Long
 
     @Override
     public Page<CheckItemDto> getAllByTaskId(Long taskId, Pageable pageable) {
-        System.out.println(taskId);
         return checkItemRepository.findByTaskId(taskId, pageable).map(
                 checkItem -> modelMapper.map(checkItem, CheckItemDto.class));
     }

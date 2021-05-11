@@ -16,7 +16,6 @@ import ru.itis.javalab.trello.api.dto.TaskDto;
 import ru.itis.javalab.trello.api.services.CheckItemService;
 
 @RestController
-@RequestMapping("/check")
 public class CheckItemController {
 
     private final CheckItemService checkItemService;
@@ -28,7 +27,7 @@ public class CheckItemController {
 
     @ApiOperation(value = "Получение чеклиста по id задачи")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно найден", response = CheckItemDto.class)})
-    @GetMapping("/all")
+    @RequestMapping("/check/all")
     public Page<CheckItemDto> findAllByTaskID(@RequestParam Long taskId, Pageable pageable){
         return checkItemService.getAllByTaskId(taskId, pageable);
     }

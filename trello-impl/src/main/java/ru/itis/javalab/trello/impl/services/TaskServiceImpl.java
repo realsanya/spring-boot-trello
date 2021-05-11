@@ -44,4 +44,16 @@ public class TaskServiceImpl implements TaskService<TaskDto, Long> {
         taskDto.setStatus("TODO");
         taskRepository.save(modelMapper.map(taskDto, Task.class));
     }
+
+    @Override
+    public void archiveTask(Long id) {
+        Optional<Task> task = taskRepository.findById(id);
+
+        if (task.isPresent()) {
+            TaskDto taskDto = modelMapper.map(task, TaskDto.class);
+            taskDto.setStatus("ARCHIVED");
+            taskRepository.save(modelMapper.map(taskDto, Task.class));
+        }
+
+    }
 }
