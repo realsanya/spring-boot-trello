@@ -31,7 +31,7 @@ public class CommentController {
     @ApiOperation(value = "Добавление нового комментария")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно сохранен", response = CommentDto.class)})
     @PostMapping("/comments/add")
-    public ResponseEntity<?> addTask(@RequestBody CommentDto commentDto){
+    public ResponseEntity<?> addComment(@RequestBody CommentDto commentDto){
         commentService.addComment(commentDto);
         return ResponseEntity.ok("Success");
     }

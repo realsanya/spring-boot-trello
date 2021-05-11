@@ -34,7 +34,6 @@ public class DashboardController {
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Успешно найден", response = DashboardDto.class)})
     @GetMapping("/dashboard")
     public ResponseEntity<DashboardDto> dashboard(@RequestParam Long projectId, @RequestParam  Long userId) throws Throwable {
-        System.out.println(projectId + " " + userId);
          DashboardDto dashboardDto = (DashboardDto) dashboardService.getByProjectIdAndUserId(projectId, userId)
                 .orElseThrow(() -> new NotFoundException("Dashboard not found"));
          return ResponseEntity.ok(dashboardDto);

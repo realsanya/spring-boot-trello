@@ -7,7 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ru.itis.javalab.trello.impl.models.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    @EntityGraph(value = "Task.Comments")
     Page<Comment> findByTaskId(Long taskId, Pageable pageable);
-
 }

@@ -32,7 +32,6 @@ public class SignUpController {
     @PostMapping(value = "/signUp", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> handleSignUp(@Valid @RequestBody SignUpForm signUpForm) {
         if (signUpService.userIsExist(signUpForm.getEmail())) {
-//            return ResponseEntity.badRequest().body(new MessageResponse("Пользователь с таким email уже существует"));
             return ResponseEntity.badRequest().body(signUpForm);
         }
         signUpService.signUp(signUpForm);

@@ -12,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentDto {
+    private Long id;
     private Long userId;
     private Long taskId;
     public String text;

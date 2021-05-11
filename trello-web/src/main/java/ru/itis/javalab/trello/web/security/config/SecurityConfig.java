@@ -42,16 +42,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             http.csrf().disable();
             http.oauth2Client();
             http.authorizeRequests()
+                    .antMatchers("/settings").authenticated()
                     .antMatchers("/signIn").permitAll()
                     .antMatchers("/signUp").permitAll()
                     .antMatchers("/home").permitAll()
                     .antMatchers("/support").permitAll()
+                    .antMatchers("/project/delete").hasAuthority("ADMIN")
 
                     .and()
                     .formLogin()
                     .loginPage("/signIn")
                     .usernameParameter("email")
-                    .passwordParameter("password")
+//                    .passwordParameter("password")
                     .defaultSuccessUrl("/main")
                     .failureUrl("/signIn?error")
                     .and()
@@ -67,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             http.csrf().disable();
             http.antMatcher("/**")
                     .authorizeRequests()
-                    .antMatchers("/home").authenticated().and()
+                    .antMatchers("/main").authenticated().and()
                     .formLogin().disable()
                     .httpBasic().and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
