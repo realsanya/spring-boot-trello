@@ -12,6 +12,14 @@ import javax.validation.Validator;
 @SpringBootApplication
 public class TrelloImplApplication{
 
+    @Value("${jwt.token.secret}")
+    private String secret;
+
+    @Bean
+    public Algorithm algorithm() {
+        return Algorithm.HMAC256(secret);
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(TrelloImplApplication.class, args);
     }

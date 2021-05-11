@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.itis.javalab.trello.api.dto.AttachmentDto;
 import ru.itis.javalab.trello.api.dto.CommentDto;
 import ru.itis.javalab.trello.api.services.AttachmentService;
+import ru.itis.javalab.trello.impl.models.Attachment;
 import ru.itis.javalab.trello.impl.repositories.AttachmentRepository;
 
 @Service
@@ -26,5 +27,10 @@ public class AttachmentServiceImpl implements AttachmentService<AttachmentDto, L
     public Page<AttachmentDto> getByTaskId(Long taskId, Pageable pageable) {
         return attachmentRepository.findByTaskId(taskId, pageable).map(
                 attachment -> modelMapper.map(attachment, AttachmentDto.class));
+    }
+
+    @Override
+    public void addAttachment(AttachmentDto attachmentDto) {
+        attachmentRepository.save(modelMapper.map(attachmentDto, Attachment.class));
     }
 }

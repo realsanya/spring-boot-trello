@@ -3,6 +3,7 @@ package ru.itis.javalab.trello.impl.services;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import lombok.SneakyThrows;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,14 +19,10 @@ import ru.itis.javalab.trello.impl.utlis.TokenGenerator;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.function.Supplier;
 
 @Service
 public class SignInServiceImpl implements SignInService<SignInDto, Long> {
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     public PasswordEncoder passwordEncoder;
@@ -33,13 +30,17 @@ public class SignInServiceImpl implements SignInService<SignInDto, Long> {
     @Autowired
     private TokenRepository tokenRepository;
 
-    private TokenGenerator tokenGenerator;
-
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private Algorithm algorithm;
+
+    private final ModelMapper modelMapper;
+
+    public SignInServiceImpl(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     @SneakyThrows
     @Override
@@ -69,17 +70,20 @@ public class SignInServiceImpl implements SignInService<SignInDto, Long> {
     }
 
     @Override
-    public TokenDto googleSignIn(GoogleForm googleForm) {
+    public UserDto googleSignIn(GoogleForm googleForm) {
         Optional<User> foundUser = userRepository.findUserByEmail(googleForm.getEmail());
-        if(!foundUser.isPresent()) {
+        if (!foundUser.isPresent()) {
             User user = User.builder()
                     .email(googleForm.getEmail())
                     .auth_provider(User.AuthProvider.GOOGLE)
+                    .role(User.Role.USER)
                     .name(googleForm.getName())
                     .surname(googleForm.getSurname())
                     .build();
             userRepository.save(user);
+            Optional<User> user1 = userRepository.findUserByEmail(googleForm.getEmail());
+            return modelMapper.map(user1, UserDto.class);
         }
-        return null;
+        return modelMapper.map(foundUser, UserDto.class);
     }
 }

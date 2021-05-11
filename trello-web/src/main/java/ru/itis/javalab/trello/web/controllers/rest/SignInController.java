@@ -1,17 +1,13 @@
 package ru.itis.javalab.trello.web.controllers.rest;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.itis.javalab.trello.api.dto.*;
-import ru.itis.javalab.trello.api.exception.NotFoundException;
+import ru.itis.javalab.trello.api.services.SignInService;
 import ru.itis.javalab.trello.api.services.UserService;
-import ru.itis.javalab.trello.impl.models.User;
 import ru.itis.javalab.trello.web.security.jwt.provider.JwtAuthenticationProvider;
 
 import java.util.Optional;
@@ -21,10 +17,13 @@ public class SignInController {
 
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
     private final UserService userService;
+    private final SignInService signInService; //TODO убрать отсюда
 
-    public SignInController(JwtAuthenticationProvider jwtAuthenticationProvider, UserService userService) {
+
+    public SignInController(JwtAuthenticationProvider jwtAuthenticationProvider, UserService userService, SignInService signInService) {
         this.jwtAuthenticationProvider = jwtAuthenticationProvider;
         this.userService = userService;
+        this.signInService = signInService;
     }
 
     @RequestMapping("/signIn")
@@ -38,5 +37,29 @@ public class SignInController {
                 .userData(userDto)
                 .build();
         return ResponseEntity.ok(signInDto);
+    }
+
+    @RequestMapping("/signIn/google")
+    public ResponseEntity<?> handleSignIn(@RequestBody GoogleForm googleForm) throws Throwable {
+//        System.out.println(googleForm);
+        Optional<UserDto> userDto = userService.getUserByEmail(googleForm.getEmail());
+        if (!userDto.isPresent()) {
+            UserDto userDto1 = signInService.googleSignIn(googleForm);
+            String token = jwtAuthenticationProvider.createToken(googleForm.getEmail());
+            jwtAuthenticationProvider.authenticate(token);
+            SignInDto signInDto = SignInDto.builder()
+                    .token(token)
+                    .userData(userDto.orElse(null))
+                    .build();
+            return ResponseEntity.ok(signInDto);
+        } else {
+            String token = jwtAuthenticationProvider.createToken(googleForm.getEmail());
+            jwtAuthenticationProvider.authenticate(token);
+            SignInDto signInDto = SignInDto.builder()
+                    .token(token)
+                    .userData(userDto.orElse(null))
+                    .build();
+            return ResponseEntity.ok(signInDto);
+        }
     }
 }
